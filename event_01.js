@@ -1,18 +1,10 @@
 import { generateSecretKey, getPublicKey } from 'nostr-tools'
 import { generateSeedWords, validateWords, privateKeyFromSeedWords } from 'nostr-tools/nip06'
+
 const mnemonic = "curve foster stay broccoli equal icon bamboo champion casino impact will damp"
 let mnemonic_validation = validateWords(mnemonic)
 let secret_key = privateKeyFromSeedWords(mnemonic, "", 0)
 let public_key = getPublicKey(secret_key)
-
-console.log("mnemonic")
-console.log(mnemonic)
-console.log("\nmnemonic validation")
-console.log(mnemonic_validation)
-console.log("\nsecret_key")
-console.log(secret_key)
-console.log("\npublic_key")
-console.log(public_key)
 
 
 
