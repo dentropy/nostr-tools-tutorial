@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nostr-rs-relay:
+    image: scsibug/nostr-rs-relay:latest
+    user: "1000:1000"
+    ports:
+      - "7000:8080"
+    volumes:
+      - "./config.toml:/usr/src/app/config.toml"
+      - "./data:/usr/src/app/db"
