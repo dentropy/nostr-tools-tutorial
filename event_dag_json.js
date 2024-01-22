@@ -29,8 +29,8 @@ console.log(isGood)
 import { Relay } from 'nostr-tools'
 import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
 
-// const relay = await Relay.connect('ws://localhost:7000')
-// console.log(`\nconnected to ${relay.url}`)
+const relay = await Relay.connect('ws://localhost:7000')
+console.log(`\nconnected to ${relay.url}`)
 
 
 // relay.subscribe([
@@ -49,7 +49,7 @@ import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
 console.log("\nsignedEvent")
 console.log(signedEvent)
 
-// await relay.publish(signedEvent)
+await relay.publish(signedEvent)
 
 
 import { encode, decode } from '@ipld/dag-json'
