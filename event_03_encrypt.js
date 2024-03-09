@@ -23,7 +23,9 @@ import { finalizeEvent, verifyEvent } from 'nostr-tools'
 let signedEvent = finalizeEvent({
     kind: 4,
     created_at: Math.floor(Date.now() / 1000),
-    tags: [public_key_1],
+    tags: [ 
+      [public_key_1]
+    ],
     content: ciphertext,
   }, secret_key_0)
   
@@ -34,7 +36,7 @@ console.log(isGood)
 
 
 import { Relay } from 'nostr-tools'
-import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
+// import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
 
 const relay = await Relay.connect('ws://localhost:7000')
 

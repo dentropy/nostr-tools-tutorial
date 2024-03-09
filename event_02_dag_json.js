@@ -27,7 +27,7 @@ console.log(isGood)
 
 
 import { Relay } from 'nostr-tools'
-import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
+// import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
 
 const relay = await Relay.connect('ws://localhost:7000')
 console.log(`\nconnected to ${relay.url}`)
