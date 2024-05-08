@@ -2,3 +2,4 @@ node_modules
 data/
 ./relay/data
 *ndjson
+bun*

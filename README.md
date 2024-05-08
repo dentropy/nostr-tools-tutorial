@@ -17,3 +17,10 @@ sudo chown -R 1000 data
 
 * Bun (DOES NOT WORK WITH NODEJS)
 * Docker
+
+#### Nostr Relays
+
+``` bash
+wss://nostr-pub.wellorder.net
+
+

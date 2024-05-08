@@ -1,12 +1,19 @@
 import { Relay } from 'nostr-tools'
-import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
-
-
-
 import { generateSecretKey, getPublicKey } from 'nostr-tools'
 import { encrypt, decrypt } from 'nostr-tools/nip04'
 import { generateSeedWords, validateWords, privateKeyFromSeedWords } from 'nostr-tools/nip06'
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils'
+
+
+let relay_url = await 'wss://relay.newatlantis.top'
+if(process.env.NOSTR_RELAY_URL != undefined){
+  if(String(process.env.NOSTR_RELAY_URL).slice(0, 4) == "ws://" || String(process.env.NOSTR_RELAY_URL.slice(0, 5)) == "wss://"){
+    relay_url = process.env.NOSTR_RELAY_URL
+  }  
+  console.log("Using Relay: " + String(process.env.NOSTR_RELAY_URL))
+}
+const relay = await Relay.connect(relay_url)
+
 
 const mnemonic = "curve foster stay broccoli equal icon bamboo champion casino impact will damp"
 let mnemonic_validation = validateWords(mnemonic)
@@ -22,8 +29,6 @@ async function decode_cyphertext(ciphertext){
 }
 
 
-const relay = await Relay.connect('ws://localhost:7000')
-console.log(`\nconnected to ${relay.url}`)
 relay.subscribe([
     
     {

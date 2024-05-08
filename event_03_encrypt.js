@@ -2,6 +2,19 @@ import { generateSecretKey, getPublicKey } from 'nostr-tools'
 import { encrypt, decrypt } from 'nostr-tools/nip04'
 import { generateSeedWords, validateWords, privateKeyFromSeedWords } from 'nostr-tools/nip06'
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils'
+import { Relay } from 'nostr-tools'
+import { finalizeEvent, verifyEvent } from 'nostr-tools'
+
+
+let relay_url = await 'wss://relay.newatlantis.top'
+if(process.env.NOSTR_RELAY_URL != undefined){
+  if(String(process.env.NOSTR_RELAY_URL).slice(0, 4) == "ws://" || String(process.env.NOSTR_RELAY_URL.slice(0, 5)) == "wss://"){
+    relay_url = process.env.NOSTR_RELAY_URL
+  }  
+  console.log("Using Relay: " + String(process.env.NOSTR_RELAY_URL))
+}
+const relay = await Relay.connect(relay_url)
+
 
 const mnemonic = "curve foster stay broccoli equal icon bamboo champion casino impact will damp"
 let mnemonic_validation = validateWords(mnemonic)
@@ -17,9 +30,6 @@ let decrypted_text = await decrypt(secret_key_1, public_key_0, ciphertext)
 console.log(ciphertext)
 console.log(decrypted_text)
 
-
-import { finalizeEvent, verifyEvent } from 'nostr-tools'
-
 let signedEvent = finalizeEvent({
     kind: 4,
     created_at: Math.floor(Date.now() / 1000),
@@ -34,11 +44,6 @@ let isGood = verifyEvent(signedEvent)
 console.log("\nisGood")
 console.log(isGood)
 
-
-import { Relay } from 'nostr-tools'
-// import 'websocket-polyfill' // UNCOMMENT WHEN USING BUN
-
-const relay = await Relay.connect('ws://localhost:7000')
 
 console.log("\nsignedEvent")
 console.log(signedEvent)
